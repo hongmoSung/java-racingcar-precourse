@@ -3,6 +3,8 @@ package racingcar;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CarTest {
@@ -18,5 +20,22 @@ public class CarTest {
         assertThat(car2.getName()).isEqualTo("car2");
     }
 
+    @Test
+    @DisplayName("주어진 횟수 동안 n대의 자동차는 전진 또는 멈출 수 있다.")
+    public void goOrStop() {
+        int tryCount = 5;
+        String names = "test1,test2,test3";
+        Cars cars = new Cars(names);
+        List<Car> carList = cars.getCars();
 
+        int result = 0;
+        for (int i = 0; i < tryCount; i++) {
+            ++result;
+            for (Car car : carList) {
+                car.go();
+                car.stop();
+            }
+        }
+        assertThat(result).isEqualTo(5);
+    }
 }

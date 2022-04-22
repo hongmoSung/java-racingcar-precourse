@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CarTest {
 
@@ -37,5 +38,26 @@ public class CarTest {
             }
         }
         assertThat(result).isEqualTo(5);
+    }
+
+    @Test
+    @DisplayName("random 값이 4이상일 경우 전진하고, 3이하의 값이면 멈춘다.")
+    public void goCondition() {
+        Car car = new Car("goOrStop");
+        ResultPlay play1 = car.paly(4);
+        ResultPlay play2 = car.paly(3);
+
+        assertThat(play1).isEqualTo(ResultPlay.GO);
+        assertThat(play2).isEqualTo(ResultPlay.STOP);
+    }
+
+    @Test
+    @DisplayName("전진하는 조건은 0에서 9사이의 random 값")
+    public void randomNumberValidationTest() {
+        Car car = new Car("goOrStop");
+        assertThatThrownBy(() -> car.paly(10))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> car.paly(-1))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

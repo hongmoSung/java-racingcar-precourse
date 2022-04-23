@@ -26,4 +26,14 @@ public class View {
             car.printCar();
         }
     }
+
+    public static void printWinnerNames(List<String> winnerNames) {
+        StringBuilder stringBuffer = new StringBuilder();
+
+        for (String winnerName : winnerNames) {
+            stringBuffer.append(winnerName).append(", ");
+        }
+        String result = String.valueOf(stringBuffer);
+        System.out.println("최종 우승자: " + result.substring(0, result.length() -2));
+    }
 }

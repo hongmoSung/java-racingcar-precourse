@@ -1,5 +1,6 @@
 package racingcar.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
@@ -19,5 +20,13 @@ public class Game {
     public List<Car> gameStart() {
         --tryCount;
         return cars.depart();
+    }
+
+    public List<String> getWinnersNames() {
+        List<String> winnerNames = new ArrayList<>();
+        for (Car car : cars.geMaxForwardCars()) {
+            winnerNames.add(car.getName());
+        }
+        return winnerNames;
     }
 }

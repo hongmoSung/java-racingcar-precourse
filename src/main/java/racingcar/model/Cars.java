@@ -30,4 +30,23 @@ public class Cars {
         }
         return this.cars;
     }
+
+    public List<Car> geMaxForwardCars() {
+        int maxForwardCount = getMaxForwardCount();
+
+        List<Car> winners = new ArrayList<>();
+
+        for (Car car : cars) {
+            if (maxForwardCount == car.getForwardCount()) winners.add(car);
+        }
+        return winners;
+    }
+
+    private int getMaxForwardCount() {
+        int maxForwardCount = 0;
+        for (Car car : cars) {
+            maxForwardCount = Math.max(maxForwardCount, car.getForwardCount());
+        }
+        return maxForwardCount;
+    }
 }

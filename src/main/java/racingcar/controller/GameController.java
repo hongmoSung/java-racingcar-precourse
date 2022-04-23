@@ -13,6 +13,7 @@ public class GameController {
         while (!game.gameOver()) {
             View.printCars(game.gameStart());
         }
+        View.printWinnerNames(game.getWinnersNames());
     }
 
 }

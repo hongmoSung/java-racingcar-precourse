@@ -21,14 +21,6 @@ public class Car {
         return forwardCount;
     }
 
-    public void go() {
-        System.out.println("전진 합니다.");
-    }
-
-    public void stop() {
-        System.out.println("멈춥니다.");
-    }
-
     public void depart() {
         int randomNumber = Randoms.pickNumberInRange(0, 9);
         randomNumberValidation(randomNumber);
@@ -45,7 +37,7 @@ public class Car {
         for (int i = 0; i < forwardCount; i++) {
             scoreLine.append("-");
         }
-        System.out.println(name + ": " + scoreLine);
+        System.out.println(name + " : " + scoreLine);
     }
 
 }

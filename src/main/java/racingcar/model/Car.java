@@ -2,8 +2,6 @@ package racingcar.model;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
-import java.util.regex.Pattern;
-
 public class Car {
 
     private final String name;
@@ -23,13 +21,7 @@ public class Car {
 
     public void depart() {
         int randomNumber = Randoms.pickNumberInRange(0, 9);
-        randomNumberValidation(randomNumber);
         if (randomNumber >= 4) forwardCount += 1;
-    }
-
-    private void randomNumberValidation(Integer randomNumber) {
-        if (!Pattern.matches("\\d", randomNumber.toString()))
-            throw new IllegalArgumentException("[ERROR] " + "랜덤숫자는 0-9만 가능합니다.");
     }
 
     public void printCar() {

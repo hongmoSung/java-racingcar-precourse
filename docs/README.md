@@ -8,6 +8,6 @@
 - [x] 전진하는 조건은 0에서 9사이의 random 값을 구한 후 random 값이 4이상일 경우 전진하고, 3이하의 값이면 멈춘다.
 - [x] 자동차 경주 게임을 완료한 후 누가 우승했는지를 알려준다.
 - [x] 우승자가 한명 이상일경우, 쉼표(,)로 이름을 구분해 출력한다.
-- [ ] 사용자가 잘못된 값을 입력할 경우 `IllegalArgumentException`를 발생 시키고, `[ERROR]`로 시작하는 에러 메시지를 출력 후
+- [x] 사용자가 잘못된 값을 입력할 경우 `IllegalArgumentException`를 발생 시키고, `[ERROR]`로 시작하는 에러 메시지를 출력 후
   그 부분부터 입력을 다시 받는다.
-  - [ ] `Exception`이 아닌 `IllegalArgumentException`,`IllegalStateException`등과 같은 명확한 유형을 처리한다.
+  - [x] `Exception`이 아닌 `IllegalArgumentException`,`IllegalStateException`등과 같은 명확한 유형을 처리한다.

@@ -10,7 +10,6 @@ public class Cars {
     public Cars(String carNames) {
         String[] names = carNames.split(",");
         for (String name : names) {
-            carNamingRule(name);
             Car car = new Car(name);
             cars.add(car);
         }
@@ -18,10 +17,6 @@ public class Cars {
 
     public List<Car> getCars() {
         return cars;
-    }
-
-    private void carNamingRule(String name) {
-        if (name.length() > 5) throw new IllegalArgumentException("[ERROR]" + "자동차 이름은 5글자를 넘을 수 없습니다.");
     }
 
     public List<Car> depart() {

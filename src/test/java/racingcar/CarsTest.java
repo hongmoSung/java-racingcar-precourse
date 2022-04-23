@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CarsTest {
 
@@ -26,12 +25,5 @@ public class CarsTest {
         }
 
         assertThat(carNames).contains("pobi", "woni");
-    }
-
-    @Test
-    @DisplayName("이름은 5자 이하만 가능하다.")
-    public void car_name_validation() {
-        assertThatThrownBy(() -> new Cars("pobi,javaji"))
-                .isInstanceOf(IllegalArgumentException.class);
     }
 }

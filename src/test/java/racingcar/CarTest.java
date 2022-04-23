@@ -1,14 +1,26 @@
 package racingcar;
 
+import camp.nextstep.edu.missionutils.Randoms;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+import org.mockito.MockedStatic;
+import racingcar.model.Car;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.mockStatic;
 
 public class CarTest {
+
+    public static MockedStatic<Randoms> mock;
+
+    @BeforeAll
+    static void beforeAll() {
+        mock = mockStatic(Randoms.class);
+    }
 
     @Test
     @DisplayName("각 자동차에 이름을 부여할 수 있다.")
@@ -21,43 +33,26 @@ public class CarTest {
         assertThat(car2.getName()).isEqualTo("car2");
     }
 
-    @Test
-    @DisplayName("주어진 횟수 동안 n대의 자동차는 전진 또는 멈출 수 있다.")
-    public void goOrStop() {
-        int tryCount = 5;
-        String names = "test1,test2,test3";
-        Cars cars = new Cars(names);
-        List<Car> carList = cars.getCars();
+    @ParameterizedTest
+    @DisplayName("random 값이 4이상일 경우 전진한다.")
+    @ValueSource(ints = {4, 5, 6, 7, 8, 9})
+    public void goCondition(int i) {
+        mock.when(() -> Randoms.pickNumberInRange(anyInt(), anyInt())).thenReturn(i);
 
-        int result = 0;
-        for (int i = 0; i < tryCount; i++) {
-            ++result;
-            for (Car car : carList) {
-                car.go();
-                car.stop();
-            }
-        }
-        assertThat(result).isEqualTo(5);
+        Car car = new Car("go");
+        car.depart();
+        assertThat(car.getForwardCount()).isNotEqualTo(0);
     }
 
-    @Test
-    @DisplayName("random 값이 4이상일 경우 전진하고, 3이하의 값이면 멈춘다.")
-    public void goCondition() {
-        Car car = new Car("goOrStop");
-        ResultPlay play1 = car.paly(4);
-        ResultPlay play2 = car.paly(3);
+    @ParameterizedTest
+    @DisplayName("random 값이 3이하의 값이면 멈춘다.")
+    @ValueSource(ints = {0, 1, 2, 3})
+    public void stopCondition(int i) {
+        mock.when(() -> Randoms.pickNumberInRange(anyInt(), anyInt())).thenReturn(i);
 
-        assertThat(play1).isEqualTo(ResultPlay.GO);
-        assertThat(play2).isEqualTo(ResultPlay.STOP);
+        Car car = new Car("stop");
+        car.depart();
+        assertThat(car.getForwardCount()).isEqualTo(0);
     }
 
-    @Test
-    @DisplayName("전진하는 조건은 0에서 9사이의 random 값")
-    public void randomNumberValidationTest() {
-        Car car = new Car("goOrStop");
-        assertThatThrownBy(() -> car.paly(10))
-                .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> car.paly(-1))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
 }

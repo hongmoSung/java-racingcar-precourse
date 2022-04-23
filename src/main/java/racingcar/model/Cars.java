@@ -1,4 +1,4 @@
-package racingcar;
+package racingcar.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,5 +22,12 @@ public class Cars {
 
     private void carNamingRule(String name) {
         if (name.length() > 5) throw new IllegalArgumentException("[ERROR]" + "자동차 이름은 5글자를 넘을 수 없습니다.");
+    }
+
+    public List<Car> depart() {
+        for (Car car : cars) {
+            car.depart();
+        }
+        return this.cars;
     }
 }
